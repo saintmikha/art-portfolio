@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Y2K Art Portfolio – Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override grid to be 5 columns for gallery page */
+        .gallery-grid.gallery-page {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        .art-date {
+            font-family: 'NeoGen', Arial, sans-serif;
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .gallery-grid.gallery-page {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid.gallery-page {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="vaporwaveCanvas" class="vaporwave-bg"></canvas>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo" id="logo-img">
+            </div>
+        </header>
+        <nav class="y2k-nav">
+            <a href="index.html">HOME</a>
+            <a href="gallery.html" class="active">GALLERY</a>
+            <a href="about.html">ABOUT</a>
+            <a href="prices.html">PRICES</a>
+            <a href="membership.html">MEMBERSHIP</a>
+        </nav>
+        <section class="intro">
+            <h1>ART GALLERY</h1>
+            <p>This page displays all my artworks. Click on each image to show the larger preview. Click the title to be redirected to the tweet where I posted the said image.</p>
+        </section>
+        <div class="gallery-grid gallery-page" id="full-gallery-grid"></div>
+        <footer>
+            <p>© <span id="currentYear"></span> ELLE — <a href="#" id="twitterFooter" target="_blank">@saint_mikha</a></p>
+            <div class="y2k-badge">HOT!!!</div>
+        </footer>
+    </div>
+    <div id="lightbox" class="lightbox">
+        <img class="lightbox-img" id="lightbox-img" alt="Preview">
+    </div>
+    <script src="script.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>

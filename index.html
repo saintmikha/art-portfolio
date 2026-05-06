@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y2K Art Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="vaporwaveCanvas" class="vaporwave-bg"></canvas>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo" id="logo-img">
+            </div>
+        </header>
+        <nav class="y2k-nav">
+            <a href="index.html" class="active">HOME</a>
+            <a href="gallery.html">GALLERY</a>
+            <a href="about.html">ABOUT</a>
+            <a href="prices.html">PRICES</a>
+            <a href="membership.html">MEMBERSHIP</a>
+        </nav>
+        <section class="intro">
+            <h1>Welcome to Elle's Art Portfolio</h1>
+            <p>Hello! I'm Elle, and I'm a digital artist. This website serves as my art portfolio. Below are my featured artworks, manually picked by yours truly. Click on each image to show the larger preview. Click the title to be redirected to the tweet where I posted the said image.</p>
+        </section>
+        <div class="gallery-grid" id="featured-grid"></div>
+        <footer>
+            <p>© <span id="currentYear"></span> ELLE — <a href="#" id="twitterFooter" target="_blank">@saint_mikha</a></p>
+            <div class="y2k-badge">HOT!!!</div>
+        </footer>
+    </div>
+    <div id="lightbox" class="lightbox">
+        <img class="lightbox-img" id="lightbox-img" alt="Preview">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
