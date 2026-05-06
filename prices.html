@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Y2K Art Portfolio – Commissions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="vaporwaveCanvas" class="vaporwave-bg"></canvas>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo" id="logo-img">
+            </div>
+        </header>
+        <nav class="y2k-nav">
+            <a href="index.html">HOME</a>
+            <a href="gallery.html">GALLERY</a>
+            <a href="about.html">ABOUT</a>
+            <a href="prices.html" class="active">PRICES</a>
+            <a href="membership.html">MEMBERSHIP</a>
+        </nav>
+        <div class="prices-container">
+            <h2>COMMISSION PRICES</h2>
+            
+            <div class="price-category">
+                <h3>CHARACTER ILLUSTRATIONS</h3>
+                <table class="price-table">
+                    <thead>
+                        <tr><th>TYPE</th><th>PRICE (USD)</th><th>DESCRIPTION</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Bust / Portrait</td><td>$30</td><td>Head and shoulders, simple background</td></tr>
+                        <tr><td>Half Body</td><td>$60</td><td>Waist up, detailed rendering</td></tr>
+                        <tr><td>Full Body</td><td>$85</td><td>Full character, simple background</td></tr>
+                        <tr><td>Full Body + Background</td><td>$120</td><td>Detailed scene & lighting</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="price-category">
+                <h3>EXTRA OPTIONS</h3>
+                <table class="price-table">
+                    <thead><tr><th>ADD-ON</th><th>PRICE (USD)</th><th>NOTE</th></tr></thead>
+                    <tbody>
+                        <tr><td>Additional Character</td><td>+60% of base</td><td>Per extra character</td></tr>
+                        <tr><td>Complex Background</td><td>+$30</td><td>Detailed environment</td></tr>
+                        <tr><td>Commercial Use</td><td>+100%</td><td>For merch, streaming, etc.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="payment-methods">
+                <p><strong>Payment Methods:</strong> PayPal, Buy Me A Coffee</p>
+                <p>50% upfront, 50% after sketch approval.</p>
+                <p>Turnaround: 1‑3 weeks depending on complexity.</p>
+            </div>
+
+            <div class="how-to-order">
+                <a href="mailto:el_jahoda@yahoo.com?subject=Commission%20Inquiry" target="_blank">PLACE A COMMISSION!</a>
+            </div>
+        </div>
+        <footer>
+            <p>© <span id="currentYear"></span> ELLE — <a href="#" id="twitterFooter" target="_blank">@saint_mikha</a> (el_jahoda@yahoo.com) — <a href="https://buymeacoffee.com/jahoda" target="_blank">Buy Me A Coffee!</a></p>
+            <div class="y2k-badge">HOT!!!</div>
+        </footer>
+    </div>
+    <div id="lightbox" class="lightbox">
+        <img class="lightbox-img" id="lightbox-img" alt="Preview">
+    </div>
+    <script src="script.js"></script>
+    <script src="prices.js"></script>
+</body>
+</html>
