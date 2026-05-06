@@ -284,7 +284,7 @@ footer a { color: #FF00FF; text-decoration: none; }
     font-family: 'Planet Kosmos', 'Arial Black', sans-serif;
     font-size: 1.5rem;
     color: #FF00FF;
-    text-shadow: 1px 1px 0 #FF00FF;
+    text-shadow: 1px 1px 0 #000000;
     margin-bottom: 0.5rem;
     border-left: 4px solid #FF00FF;
     padding-left: 1rem;
