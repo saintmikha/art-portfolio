@@ -1,11 +1,12 @@
 @font-face {
-    font-family: 'Planet Kosmos';
-    src: url('https://saintmikha.github.io/fonts/planet_kosmos.ttf') format('truetype');
+    font-family: 'NeoGen';
+    src: url('/art-portfolio/fonts/Neogen.ttf') format('truetype');
     font-display: swap;
 }
+
 @font-face {
-    font-family: 'NeoGen';
-    src: url('https://saintmikha.github.io/fonts/Neogen.ttf') format('truetype');
+    font-family: 'Planet Kosmos';
+    src: url('/art-portfolio/fonts/planet_kosmos.ttf') format('truetype');
     font-display: swap;
 }
 
