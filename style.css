@@ -475,3 +475,25 @@ footer a { color: #FF00FF; text-decoration: none; }
 .social-links a.discord-link:hover {
     background: #4752c4;
 }
+
+/* ========== NO DOWNLOAD OVERLAY ========== */
+.image-wrapper {
+    position: relative;
+}
+.image-wrapper::after {
+    content: "✧ NO DOWNLOAD ✧";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #FF00FF;
+    font-family: 'VCR', monospace;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+    z-index: 5;
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
