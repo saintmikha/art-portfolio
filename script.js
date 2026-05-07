@@ -144,7 +144,7 @@ function addLightboxOverlay() {
     overlay.style.padding = '4px 10px';
     overlay.style.borderRadius = '20px';
     overlay.style.backdropFilter = 'blur(4px)';
-    overlay.style.pointerEvents = 'none';   // critical: allows clicking through to image
+    overlay.style.pointerEvents = 'none';
     overlay.style.zIndex = '1002';
     overlay.style.whiteSpace = 'nowrap';
     overlay.style.letterSpacing = '1px';
@@ -152,20 +152,49 @@ function addLightboxOverlay() {
     lightboxDiv.appendChild(overlay);
 }
 
-// Disable keyboard shortcuts
+// ========== IMPROVED SHORTCUT PREVENTION ==========
 function disableShortcuts(e) {
+    // Prevent Ctrl+S, Ctrl+P, Ctrl+I, Ctrl+U
     if (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'i' || e.key === 'u')) {
         e.preventDefault();
         return false;
     }
-    if (e.key === 'F12' || e.key === 'PrintScreen') {
+    // Prevent F12
+    if (e.key === 'F12') {
         e.preventDefault();
         return false;
     }
+    // Prevent PrintScreen (alone)
+    if (e.code === 'PrintScreen') {
+        e.preventDefault();
+        return false;
+    }
+    // Prevent Alt+PrintScreen
+    if (e.altKey && e.code === 'PrintScreen') {
+        e.preventDefault();
+        return false;
+    }
+    // Prevent Win+PrintScreen (metaKey + PrintScreen)
+    if (e.metaKey && e.code === 'PrintScreen') {
+        e.preventDefault();
+        return false;
+    }
+    // Prevent Win+Shift+S (Windows snipping tool)
+    if (e.metaKey && e.shiftKey && e.key === 's') {
+        e.preventDefault();
+        return false;
+    }
+    // Prevent Ctrl+Shift+C (inspect)
     if (e.ctrlKey && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         return false;
     }
+    // Prevent Ctrl+U (view source)
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+    return true;
 }
 
 // Apply all protections
@@ -215,7 +244,7 @@ function renderGallery(containerId, artworks) {
         });
         container.appendChild(card);
     });
-    protectImages(); // protect newly added images
+    protectImages();
 }
 
 // ========== LIGHTBOX ==========
