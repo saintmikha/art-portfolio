@@ -9,9 +9,9 @@ const canvas = document.getElementById('vaporwaveCanvas');
 let ctx = canvas ? canvas.getContext('2d') : null;
 
 // ========== ANIMATION PARAMETERS ==========
-const FALL_DURATION = 1.0;        // seconds from horizon to bottom
-const STAGGER = 0.2;              // seconds between line starts
-const NUM_LINES = Math.round(FALL_DURATION / STAGGER); // = 5
+const FALL_DURATION = 1.0;
+const STAGGER = 0.2;
+const NUM_LINES = Math.round(FALL_DURATION / STAGGER);
 
 let horizonY = 0;
 let fallDistance = 0;
@@ -40,14 +40,12 @@ function draw() {
     const h = canvas.height;
     ctx.clearRect(0, 0, w, h);
     
-    // Gradient above horizon
     const grad = ctx.createLinearGradient(0, 0, 0, horizonY);
     grad.addColorStop(0, '#341539');
     grad.addColorStop(1, '#C11C84');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, horizonY);
     
-    // Moving horizontal lines (constant acceleration)
     const now = performance.now() / 1000;
     const elapsed = now - animStartTime;
     for (let i = 0; i < lines.length; i++) {
@@ -65,7 +63,6 @@ function draw() {
         ctx.stroke();
     }
     
-    // Static horizon line (white)
     ctx.beginPath();
     ctx.moveTo(0, horizonY);
     ctx.lineTo(w, horizonY);
@@ -79,7 +76,6 @@ function draw() {
     ctx.lineWidth = 6;
     ctx.stroke();
     
-    // Diagonal lines (static perspective)
     const topSpacing = 40;
     const bottomSpacing = topSpacing * 5;
     const numPoints = 45;
@@ -115,40 +111,23 @@ draw();
 
 // ========== ARTWORK PROTECTION ==========
 function protectImages() {
-    // Disable right-click on all images
     document.querySelectorAll('.art-image').forEach(img => {
-        img.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            return false;
-        });
-        // Disable drag
-        img.addEventListener('dragstart', (e) => {
-            e.preventDefault();
-            return false;
-        });
+        img.addEventListener('contextmenu', (e) => e.preventDefault());
+        img.addEventListener('dragstart', (e) => e.preventDefault());
     });
 }
 
-// ========== LIGHTBOX PROTECTION ADDITIONS ==========
+// ========== LIGHTBOX PROTECTION (does NOT block clicks) ==========
 function protectLightboxImage() {
     const lbImg = document.getElementById('lightbox-img');
     if (!lbImg) return;
-    // Disable right-click
-    lbImg.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-    // Disable drag
-    lbImg.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-        return false;
-    });
+    lbImg.addEventListener('contextmenu', (e) => e.preventDefault());
+    lbImg.addEventListener('dragstart', (e) => e.preventDefault());
 }
 
 function addLightboxOverlay() {
     const lightboxDiv = document.getElementById('lightbox');
     if (!lightboxDiv) return;
-    // Remove existing overlay if any
     const existing = lightboxDiv.querySelector('.no-download-overlay');
     if (existing) existing.remove();
     
@@ -156,26 +135,25 @@ function addLightboxOverlay() {
     overlay.className = 'no-download-overlay';
     overlay.textContent = '✧ NO DOWNLOAD ✧';
     overlay.style.position = 'absolute';
-    overlay.style.bottom = '20px';
-    overlay.style.right = '20px';
+    overlay.style.bottom = '16px';
+    overlay.style.right = '16px';
     overlay.style.background = 'rgba(0,0,0,0.7)';
     overlay.style.color = '#FF00FF';
     overlay.style.fontFamily = "'VCR', monospace";
-    overlay.style.fontSize = '0.8rem';
-    overlay.style.padding = '6px 12px';
-    overlay.style.borderRadius = '30px';
+    overlay.style.fontSize = '0.7rem';
+    overlay.style.padding = '4px 10px';
+    overlay.style.borderRadius = '20px';
     overlay.style.backdropFilter = 'blur(4px)';
-    overlay.style.pointerEvents = 'none';
-    overlay.style.zIndex = '1001';
+    overlay.style.pointerEvents = 'none';   // critical: allows clicking through to image
+    overlay.style.zIndex = '1002';
     overlay.style.whiteSpace = 'nowrap';
     overlay.style.letterSpacing = '1px';
     lightboxDiv.style.position = 'relative';
     lightboxDiv.appendChild(overlay);
 }
 
-// Disable keyboard shortcuts (PrintScreen, Ctrl+S, Ctrl+P, etc.)
+// Disable keyboard shortcuts
 function disableShortcuts(e) {
-    // Ctrl+S, Ctrl+P, Ctrl+Shift+I, F12, PrintScreen (key code 44)
     if (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'i' || e.key === 'u')) {
         e.preventDefault();
         return false;
@@ -184,14 +162,13 @@ function disableShortcuts(e) {
         e.preventDefault();
         return false;
     }
-    // Also block Ctrl+Shift+C (inspect)
     if (e.ctrlKey && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         return false;
     }
 }
 
-// Apply protections on page load and after dynamic content updates
+// Apply all protections
 function applyProtections() {
     protectImages();
     protectLightboxImage();
@@ -199,16 +176,15 @@ function applyProtections() {
     document.addEventListener('keydown', disableShortcuts);
 }
 
-// Also watch for dynamically added gallery items (from render functions)
+// Watch for dynamically added gallery images
 const observer = new MutationObserver(() => {
     protectImages();
 });
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Call initially
 applyProtections();
 
-// ========== RENDER GALLERY (unchanged) ==========
+// ========== RENDER GALLERY ==========
 function renderGallery(containerId, artworks) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -239,29 +215,33 @@ function renderGallery(containerId, artworks) {
         });
         container.appendChild(card);
     });
-    // Re-apply protection to new images
-    protectImages();
+    protectImages(); // protect newly added images
 }
 
+// ========== LIGHTBOX ==========
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
-function openLightbox(src) { 
-    lightboxImg.src = src; 
+
+function openLightbox(src) {
+    lightboxImg.src = src;
     lightbox.classList.add('active');
-    // Apply protection and overlay each time lightbox opens
     protectLightboxImage();
     addLightboxOverlay();
 }
-function closeLightbox() { 
-    lightbox.classList.remove('active'); 
-    lightboxImg.src = ''; 
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
 }
+
 if (lightbox) lightbox.addEventListener('click', closeLightbox);
 if (lightboxImg) lightboxImg.addEventListener('click', e => e.stopPropagation());
 
+// ========== FOOTER ==========
 const yearSpan = document.getElementById('currentYear');
 if (yearSpan) yearSpan.innerText = new Date().getFullYear();
 const twitterFooter = document.getElementById('twitterFooter');
 if (twitterFooter) twitterFooter.href = 'https://x.com/saint_mikha';
 
+// ========== START ==========
 renderGallery('featured-grid', featuredArtworks);
