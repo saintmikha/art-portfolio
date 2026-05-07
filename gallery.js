@@ -1,6 +1,7 @@
 // ========== FULL GALLERY DATA (5x5 = 25 items) ==========
 // Replace with your own images, titles, tweet URLs, and dates
 const allArtworks = [
+	{ image: "images/valentine2.jpg", title: "VALENTINE 2", tweetUrl: "https://x.com/saint_mikha/status/2052361571683402153", date: "2026-05-07" },
 	{ image: "images/solosis.png", title: "SOLOSIS", tweetUrl: "https://x.com/saint_mikha/status/2052274231539572952", date: "2026-05-07" },
     { image: "images/valentine-trend1.jpg", title: "VALENTINE", tweetUrl: "https://x.com/saint_mikha/status/2051523363638755368", date: "2026-05-05" },
     { image: "images/toph.jpg", title: "TOPH", tweetUrl: "https://x.com/saint_mikha/status/2044710737776660861", date: "2026-04-16" },
