@@ -129,6 +129,50 @@ function protectImages() {
     });
 }
 
+// ========== LIGHTBOX PROTECTION ADDITIONS ==========
+function protectLightboxImage() {
+    const lbImg = document.getElementById('lightbox-img');
+    if (!lbImg) return;
+    // Disable right-click
+    lbImg.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+    // Disable drag
+    lbImg.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+        return false;
+    });
+}
+
+function addLightboxOverlay() {
+    const lightboxDiv = document.getElementById('lightbox');
+    if (!lightboxDiv) return;
+    // Remove existing overlay if any
+    const existing = lightboxDiv.querySelector('.no-download-overlay');
+    if (existing) existing.remove();
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'no-download-overlay';
+    overlay.textContent = '✧ NO DOWNLOAD ✧';
+    overlay.style.position = 'absolute';
+    overlay.style.bottom = '20px';
+    overlay.style.right = '20px';
+    overlay.style.background = 'rgba(0,0,0,0.7)';
+    overlay.style.color = '#FF00FF';
+    overlay.style.fontFamily = "'VCR', monospace";
+    overlay.style.fontSize = '0.8rem';
+    overlay.style.padding = '6px 12px';
+    overlay.style.borderRadius = '30px';
+    overlay.style.backdropFilter = 'blur(4px)';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.zIndex = '1001';
+    overlay.style.whiteSpace = 'nowrap';
+    overlay.style.letterSpacing = '1px';
+    lightboxDiv.style.position = 'relative';
+    lightboxDiv.appendChild(overlay);
+}
+
 // Disable keyboard shortcuts (PrintScreen, Ctrl+S, Ctrl+P, etc.)
 function disableShortcuts(e) {
     // Ctrl+S, Ctrl+P, Ctrl+Shift+I, F12, PrintScreen (key code 44)
@@ -150,6 +194,8 @@ function disableShortcuts(e) {
 // Apply protections on page load and after dynamic content updates
 function applyProtections() {
     protectImages();
+    protectLightboxImage();
+    addLightboxOverlay();
     document.addEventListener('keydown', disableShortcuts);
 }
 
@@ -193,12 +239,23 @@ function renderGallery(containerId, artworks) {
         });
         container.appendChild(card);
     });
+    // Re-apply protection to new images
+    protectImages();
 }
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
-function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add('active'); }
-function closeLightbox() { lightbox.classList.remove('active'); lightboxImg.src = ''; }
+function openLightbox(src) { 
+    lightboxImg.src = src; 
+    lightbox.classList.add('active');
+    // Apply protection and overlay each time lightbox opens
+    protectLightboxImage();
+    addLightboxOverlay();
+}
+function closeLightbox() { 
+    lightbox.classList.remove('active'); 
+    lightboxImg.src = ''; 
+}
 if (lightbox) lightbox.addEventListener('click', closeLightbox);
 if (lightboxImg) lightboxImg.addEventListener('click', e => e.stopPropagation());
 
