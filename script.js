@@ -113,6 +113,55 @@ window.addEventListener('resize', () => resizeAndReset());
 resizeAndReset();
 draw();
 
+// ========== ARTWORK PROTECTION ==========
+function protectImages() {
+    // Disable right-click on all images
+    document.querySelectorAll('.art-image').forEach(img => {
+        img.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        // Disable drag
+        img.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+    });
+}
+
+// Disable keyboard shortcuts (PrintScreen, Ctrl+S, Ctrl+P, etc.)
+function disableShortcuts(e) {
+    // Ctrl+S, Ctrl+P, Ctrl+Shift+I, F12, PrintScreen (key code 44)
+    if (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'i' || e.key === 'u')) {
+        e.preventDefault();
+        return false;
+    }
+    if (e.key === 'F12' || e.key === 'PrintScreen') {
+        e.preventDefault();
+        return false;
+    }
+    // Also block Ctrl+Shift+C (inspect)
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        return false;
+    }
+}
+
+// Apply protections on page load and after dynamic content updates
+function applyProtections() {
+    protectImages();
+    document.addEventListener('keydown', disableShortcuts);
+}
+
+// Also watch for dynamically added gallery items (from render functions)
+const observer = new MutationObserver(() => {
+    protectImages();
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Call initially
+applyProtections();
+
 // ========== RENDER GALLERY (unchanged) ==========
 function renderGallery(containerId, artworks) {
     const container = document.getElementById(containerId);
