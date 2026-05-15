@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const button = document.createElement('button');
         button.textContent = 'CHECK IT OUT';
         button.className = 'category-card-button';
-        button.onclick = (e) => {
+        // Use addEventListener instead of onclick assignment
+        button.addEventListener('click', (e) => {
             e.stopPropagation();
             window.location.href = cat.link;
-        };
+        });
         
         card.appendChild(title);
         card.appendChild(button);
