@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Elle's Art Portfolio – Pokémon</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="vaporwaveCanvas" class="vaporwave-bg"></canvas>
+    <img src="images/logo.png" alt="Logo" id="logo-img">
+
+    <div class="container">
+        <nav class="y2k-nav">
+            <a href="index.html">HOME</a>
+            <a href="gallery.html">GALLERY</a>
+            <a href="about.html">ABOUT</a>
+            <a href="prices.html">PRICES</a>
+            <a href="membership.html">MEMBERSHIP</a>
+        </nav>
+        <section class="intro">
+            <h1>POKÉMON</h1>
+            <p>Pokémon illustrations and creatures.</p>
+        </section>
+        
+        <div class="gallery-grid gallery-page" id="category-gallery-grid" style="margin-bottom: 5rem;"></div>
+		<!-- BACK BUTTON -->
+        <div style="text-align: center; margin: 0.5rem 0 5rem 0;">
+            <a href="gallery.html" class="back-button">BACK TO GALLERY</a>
+        </div>
+        <footer>
+            <p>© <span id="currentYear"></span> ELLE — <a href="#" id="twitterFooter" target="_blank">@saint_mikha</a> (el_jahoda@yahoo.com) — <a href="https://buymeacoffee.com/jahoda" target="_blank">Buy Me A Coffee!</a></p>
+            <div class="y2k-badge">HOT!!!</div>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <img class="lightbox-img" id="lightbox-img" alt="Preview">
+    </div>
+    <script src="script.js"></script>
+    <script src="pokemon.js"></script>
+</body>
+</html>
