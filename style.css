@@ -25,9 +25,9 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;          /* force vertical scrollbar on all pages */
-    overflow-x: hidden;          /* prevent horizontal scroll */
-    scrollbar-gutter: stable;    /* reserve scrollbar space to avoid layout shift */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
     width: 100%;
 }
 
@@ -51,8 +51,8 @@ body {
     margin-right: auto;
     box-sizing: border-box;
     z-index: 1;
-    overflow: visible;           /* prevent clip of hovering cards */
-    padding-bottom: 6rem;        /* space for sticky footer */
+    overflow: visible;
+    padding-bottom: 6rem;
 }
 
 /* ========== LOGO WATERMARK ========== */
@@ -351,7 +351,9 @@ footer a {
     border-radius: 32px;
     padding: 2rem;
     margin: 2rem 0;
+    position: relative;
 }
+
 .prices-container h2 {
     font-family: 'VCR', 'Arial Black', sans-serif;
     font-size: 1.8rem;
@@ -360,6 +362,7 @@ footer a {
     margin-bottom: 1rem;
     text-align: center;
 }
+
 .price-category {
     margin: 2rem 0;
     overflow-x: auto;
@@ -426,6 +429,78 @@ footer a {
     color: #0F0F0F;
     border-color: #00FFFF;
     box-shadow: 0 0 8px #FF00FF;
+}
+
+/* Prices page closed overlay (with subtext) */
+.prices-content.blurred {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.commission-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.overlay-text-wrapper {
+    text-align: center;
+    max-width: 80%;
+    padding: 1rem;
+}
+
+.overlay-text {
+    font-family: 'VCR', 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    color: #FF00FF;
+    text-shadow: 4px 4px 0 #00FFFF;
+    margin-bottom: 1rem;
+}
+
+.overlay-subtext {
+    font-family: 'VCR', Arial, sans-serif;
+    font-size: 1rem;
+    color: #00FFFF;
+    text-shadow: 1px 1px 0 #722F37;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.overlay-subtext a {
+    color: #FF00FF;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.overlay-subtext a:hover {
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .overlay-text {
+        font-size: 1.8rem;
+    }
+    .overlay-subtext {
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 480px) {
+    .overlay-text {
+        font-size: 1.3rem;
+    }
+    .overlay-subtext {
+        font-size: 0.7rem;
+    }
 }
 
 /* ========== MEMBERSHIP PAGE ========== */
@@ -541,7 +616,7 @@ footer a {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin: 4rem 0 6rem 0;    /* increased bottom margin for footer space */
+    margin: 4rem 0 6rem 0;
     width: 100%;
     overflow: visible;
 }
@@ -564,12 +639,10 @@ footer a {
     justify-content: center;
     box-sizing: border-box;
 }
-
 .category-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 0 20px #FF00FF;
 }
-
 .category-card-overlay {
     position: absolute;
     top: 0;
@@ -581,7 +654,6 @@ footer a {
     border-radius: 32px;
     z-index: 0;
 }
-
 .category-card-title {
     position: relative;
     z-index: 1;
@@ -591,7 +663,6 @@ footer a {
     text-shadow: 2px 2px 0 #722F37;
     margin: 0 0 0.5rem 0;
 }
-
 .category-card-button {
     position: relative;
     z-index: 1;
@@ -605,7 +676,6 @@ footer a {
     font-size: 1rem;
     transition: all 0.2s;
 }
-
 .category-card-button:hover {
     background: #00FFFF;
     color: #000;
